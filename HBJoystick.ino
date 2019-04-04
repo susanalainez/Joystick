@@ -61,7 +61,9 @@ void createMathModel() {
   theta_deg = theta_rad * 4068/71;
   
     if((theta_deg > 75) && (theta_deg < 105)) { //forward
-      speed = map(pot_value, 0, 1023, 0, 400);
+      speed = map(radius, 0, 500, 75, 190);
+      analogWrite(motorL, speed);
+      analogWrite(motorR, speed);
       
     }
     else if((theta_deg > -105) && (theta_deg < -75)) { //backward
