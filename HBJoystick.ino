@@ -1,8 +1,7 @@
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
- int motorR = 6;
- int motorL = 5;
+
+
+ int motorL = 6;
+ int motorR = 5;
   
  int xJPin = A0;
  int yJPin = A1;
@@ -20,6 +19,12 @@ void setup() {
   float theta_deg;
   float radius;
 
+
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+
   pinMode(motorR, OUTPUT);
   pinMode(motorL, OUTPUT);
   
@@ -27,23 +32,15 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-   readJoystick();
-
-}
-
-void readJoystick(){
   x_coordinate = analogRead(xJPin);
   y_coordinate = analogRead(yJPin);
   
   delay(10);
 
   x_coordinate = map(x_coordinate, 0, 1023, -500, 500);
-  y_coordinate = map(y_coordinate, 0, 1023, -500, 500;
-}
+  y_coordinate = map(y_coordinate, 0, 1023, -500, 500);
 
 
-void createMathModel() {
   radius = sqrt(sq(x_coordinate) + sq(y_coordinate));    
     if(radius < 28) {
       theta_rad = 0;
@@ -70,24 +67,24 @@ void createMathModel() {
       
 
     }
-    else if(((theta_deg < 75) && (theta_deg > 0)) || ((theta_deg > -75) && (theta_deg < 0))) { //right
+    else if(((theta_deg < 75) && (theta_deg > 0)) || ((theta_deg > -75) && (theta_deg < 0))) { //left
  
-     analogWrite(motorL, 110);
-      analogWrite(motorR, 0);
+     analogWrite(motorR, 110);
+      analogWrite(motorL, 0);
     
     }
-    else if(((theta_deg < 105) && (theta_deg > 0)) || ((theta_deg > -105) && (theta_deg < 0))) { //leftb      theta_deg = theta_deg - 180;    
-    }
+    else if(((theta_deg > 105) && (theta_deg < 180)) || ((theta_deg > -105) && (theta_deg < -180))) { //right      theta_deg = theta_deg - 180;    
+    
 
-     analogWrite(motorL, 0);
-      analogWrite(motorR, 110);
+     analogWrite(motorR, 0);
+      analogWrite(motorL, 110);
     }
   else
     {
       analogWrite(motorL, 0);
       analogWrite(motorR, 0);
-               
+    }         
   
   
- 
+
 }
